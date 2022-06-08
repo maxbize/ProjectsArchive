@@ -1,0 +1,3 @@
+﻿class OceanBackground extends Background
+{
+}

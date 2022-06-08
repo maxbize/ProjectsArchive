@@ -1,0 +1,10 @@
+C:\vcpphtp2\ch06\Excercises\The Adventures of Trexter\The Adventures of Trexter\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\vcpphtp2\ch06\Excercises\The Adventures of Trexter\The Adventures of Trexter\bin\Debug\The Adventures of Trexter.exe
+C:\vcpphtp2\ch06\Excercises\The Adventures of Trexter\The Adventures of Trexter\bin\Debug\The Adventures of Trexter.pdb
+C:\vcpphtp2\ch06\Excercises\The Adventures of Trexter\The Adventures of Trexter\obj\x86\Debug\The Adventures of Trexter.exe
+C:\vcpphtp2\ch06\Excercises\The Adventures of Trexter\The Adventures of Trexter\obj\x86\Debug\The Adventures of Trexter.pdb
+C:\Users\Max\Documents\Visual Studio 2010\Projects\The Adventures of Trexter\The Adventures of Trexter\obj\x86\Debug\The Adventures of Trexter.exe
+C:\Users\Max\Documents\Visual Studio 2010\Projects\The Adventures of Trexter\The Adventures of Trexter\obj\x86\Debug\The Adventures of Trexter.pdb
+C:\Users\Max\Documents\Visual Studio 2010\Projects\The Adventures of Trexter\The Adventures of Trexter\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Max\Documents\Visual Studio 2010\Projects\The Adventures of Trexter\The Adventures of Trexter\bin\Debug\The Adventures of Trexter.exe
+C:\Users\Max\Documents\Visual Studio 2010\Projects\The Adventures of Trexter\The Adventures of Trexter\bin\Debug\The Adventures of Trexter.pdb

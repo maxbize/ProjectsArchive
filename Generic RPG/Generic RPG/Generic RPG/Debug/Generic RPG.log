@@ -1,0 +1,15 @@
+﻿  Battle.cpp
+  BeingClass.cpp
+C:\Users\Max\Downloads\Generic RPG\Generic RPG\Generic RPG\BeingClass.cpp(246,39): warning C4244: '*=': conversion from 'double' to 'int', possible loss of data
+  Create Enemy.cpp
+  Error Text.cpp
+  GoToHealer.cpp
+C:\Users\Max\Downloads\Generic RPG\Generic RPG\Generic RPG\GoToHealer.cpp(6,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Inventory.cpp
+  Main.cpp
+C:\Users\Max\Downloads\Generic RPG\Generic RPG\Generic RPG\Main.cpp(23,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Weapon.cpp
+  Generating Code...
+C:\Users\Max\Downloads\Generic RPG\Generic RPG\Generic RPG\Inventory.cpp(79): warning C4715: 'Inventory::getItem': not all control paths return a value
+C:\Users\Max\Downloads\Generic RPG\Generic RPG\Generic RPG\Inventory.cpp(87): warning C4715: 'Inventory::getWeapon': not all control paths return a value
+  Generic RPG.vcxproj -> C:\Users\Max\Downloads\Generic RPG\Generic RPG\Debug\Generic RPG.exe

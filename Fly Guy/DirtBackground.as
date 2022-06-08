@@ -1,0 +1,4 @@
+﻿class DirtBackground extends Background
+{
+	
+}
