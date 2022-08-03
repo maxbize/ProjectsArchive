@@ -39,3 +39,7 @@ sysinfo.txt
 
 # Build readme
 !README
+
+.svn/
+Build/
+bin/
