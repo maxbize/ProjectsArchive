@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
         // Logic initialisation
         levelManagerRef = GameObject.Find("Level Manager").GetComponent<LevelManager>();
         levelMarkers = levelManagerRef.currentLevel.markers;
-        gameObject.rigidbody.transform.position = levelMarkers[nextMarker] + 20 * Vector3.up;
+        gameObject.GetComponent<Rigidbody>().transform.position = levelMarkers[nextMarker] + 20 * Vector3.up;
         markerDistanceLastFrame = 1E20f; // Just initialize this to a very high value so that we don't register a turn in frame 1
         Turn();
 
@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
             Vector3 direction = levelMarkers[nextMarker] - levelMarkers[lastMarker];
             lookRotation.SetLookRotation(direction);
             gameObject.transform.rotation = lookRotation;
-            gameObject.rigidbody.velocity = direction.normalized * speed;
+            gameObject.GetComponent<Rigidbody>().velocity = direction.normalized * speed;
         }
     }
 
@@ -98,7 +98,7 @@ public class Enemy : MonoBehaviour
 
         Vector3 destination = transform.position;
         Vector3 legSource = transform.position;
-        float distanceToTravel = rigidbody.velocity.magnitude * t;
+        float distanceToTravel = GetComponent<Rigidbody>().velocity.magnitude * t;
         int nextMarkerIndex = nextMarker;
         float nextMarkerDist = (transform.position - levelMarkers[nextMarkerIndex]).magnitude;
         int numTurns = 0;
@@ -137,13 +137,13 @@ public class Enemy : MonoBehaviour
         if (health == MAX_HEALTH)
         {
             healthBar.transform.localScale = new Vector3(healthBarWidth, healthBarWidth, healthBarMaxLength);
-            healthBar.renderer.material.color = Color.Lerp(Color.red, Color.green, healthFraction);
+            healthBar.GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.green, healthFraction);
         }
         else
         {
             healthBar.transform.localScale = new Vector3(healthBarWidth, healthBarWidth,
                 healthBar.transform.localScale.z - (healthBar.transform.localScale.z - healthFraction * healthBarMaxLength) * scaleRate);
-            healthBar.renderer.material.color = Color.Lerp(Color.red, Color.green, healthBar.transform.localScale.z / healthBarMaxLength);
+            healthBar.GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.green, healthBar.transform.localScale.z / healthBarMaxLength);
 
         }
     }

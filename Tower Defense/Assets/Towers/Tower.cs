@@ -143,11 +143,11 @@ public class Tower : MonoBehaviour
     // Every tower has a unique set of upgrades
     protected virtual void UpdateUpgradeCost()
     {
-        throw new NotSupportedException(" *** ERROR: Virtual function must be overriden");
+        //throw new NotSupportedException(" *** ERROR: Virtual function must be overriden");
     }
     public virtual void Upgrade()
     {
-        throw new NotSupportedException(" *** ERROR: Virtual function must be overriden");
+        //throw new NotSupportedException(" *** ERROR: Virtual function must be overriden");
     }
 
     // Master cost function. Round down to nearest 5

@@ -39,8 +39,8 @@ public class GUIManager : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Box(new Rect(Screen.width - 200, 0, 200, 150), ""); // Main box for GUI
-        GUILayout.BeginArea(new Rect(Screen.width - 200, 0, 200, 150));
+        GUI.Box(new Rect(Screen.width - 200, 0, 200, 450), ""); // Main box for GUI
+        GUILayout.BeginArea(new Rect(Screen.width - 200, 0, 200, 450));
         GUILayout.BeginVertical();
 
         GUILayout.Space(20);
@@ -56,7 +56,6 @@ public class GUIManager : MonoBehaviour
 
         GUILayout.Space(20);
 
-        /*
         // All of the build stuff
         foreach (string towerStr in towerDict.Keys)
         {

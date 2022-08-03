@@ -105,7 +105,7 @@ public class BuildManager : MonoBehaviour
         if (invalidPositions.Contains(pos))
         {
             towerBeingBuilt.transform.position = towerPoolPosition;
-            buildMarker.renderer.material.color = Color.red;
+            buildMarker.GetComponentInChildren<Renderer>().material.color = Color.red;
             greenRangeMarker.transform.position = towerPoolPosition;
             redRangeMarker.transform.position = towerPoolPosition;
             return false;
@@ -113,7 +113,7 @@ public class BuildManager : MonoBehaviour
         else
         {
             towerBeingBuilt.transform.position = pos;
-            buildMarker.renderer.material.color = Color.green;
+            buildMarker.GetComponentInChildren<Renderer>().material.color = Color.green;
             greenRangeMarker.transform.position = pos;
             redRangeMarker.transform.position = pos + Vector3.up;
             return true;

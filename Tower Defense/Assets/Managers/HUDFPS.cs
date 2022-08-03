@@ -21,6 +21,7 @@ public class HUDFPS : MonoBehaviour
     private int frames = 0; // Frames drawn over the interval
     private float timeleft; // Left time for current interval
 
+    /*
     void Start()
     {
         if (!guiText)
@@ -59,4 +60,5 @@ public class HUDFPS : MonoBehaviour
             frames = 0;
         }
     }
+    */
 }

@@ -29,10 +29,10 @@ public class BombProjectile : MonoBehaviour
         this.damage = damage;
         this.enemies = enemies;
 
-        rigidbody.velocity = velocity;
-        rigidbody.useGravity = true;
+        GetComponent<Rigidbody>().velocity = velocity;
+        GetComponent<Rigidbody>().useGravity = true;
 
-        rigidbody.AddTorque(Random.insideUnitSphere * 500); // Visual effect
+        GetComponent<Rigidbody>().AddTorque(Random.insideUnitSphere * 500); // Visual effect
     }
 
     void Update()
@@ -60,8 +60,8 @@ public class BombProjectile : MonoBehaviour
         }
 
         transform.position = new Vector3(0, -80, 0);
-        rigidbody.velocity = Vector3.zero;
-        rigidbody.useGravity = false;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().useGravity = false;
 
         Invoke("DelayedDestroy", deathDelay);
     }

@@ -21,7 +21,7 @@ public class IceProjectile : MonoBehaviour
     {
         if (targetEnemy)
         {
-            rigidbody.velocity = (targetEnemy.transform.position - transform.position).normalized * speed;
+            GetComponent<Rigidbody>().velocity = (targetEnemy.transform.position - transform.position).normalized * speed;
             Quaternion rotation = new Quaternion(); // Apparently theres some Unity bug that doesn't allow you to setLookRotation directly
             rotation.SetLookRotation(targetEnemy.transform.position - transform.position);
             transform.rotation = rotation;
@@ -37,7 +37,7 @@ public class IceProjectile : MonoBehaviour
     {
         transform.position = new Vector3(0, -39, 0);
         speed = 0;
-        rigidbody.velocity = Vector3.zero; // Even though we just set the speed to zero, if the enemy has died the Update will not stop the projectile
+        GetComponent<Rigidbody>().velocity = Vector3.zero; // Even though we just set the speed to zero, if the enemy has died the Update will not stop the projectile
         Invoke("DelayedDestroy", 2.0f);
         if (collider.isTrigger && collider.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
