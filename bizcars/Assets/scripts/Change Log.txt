@@ -1,0 +1,59 @@
+﻿
+===========================================================================================================================
+
+5/7/14 - Max:
+
+- Tags:
+	- Removed the "player" tag from car's road collider - was causing exceptions
+	- Removed setting tags in Game Manager - it had no effect. Tags are already in the car prefab
+ 
+- Ghosts:
+	- GhostCar now usees Update instead of FixedUpdate - it lerps between states and is much smoother
+	- Ghosts now change color according to player
+	- Ghosts now render over skid marks instead of under
+
+- Checkpoints:
+	- Got rid of checkpoint.cs and modified coloredCheckpoint.cs to fulfill its tasks
+	- Checkpoint lights now reset every lap
+	- Checkpoints will now only light in the correct order
+
+===========================================================================================================================
+
+5/8/14 - Max:
+
+- Ghosts:
+	- Removed time information from FrameState. It SHOULD be constant (Time.fixedDeltaTime)
+
+- Skid marks:
+	- Skid marks now fade away
+	- Now two skid marks - one per side
+	- SkidMarkTrail is now a prefab - no longer a child of Car
+	- Fixed a bug that allowed a skidMark to be drawn while driving straight backwards
+
+===========================================================================================================================
+
+5/9/14 - Max:
+
+- Ghosts:
+	- Ghosts no longer record every frame as a keyframe. Modify GhostRecorder.keyFrameRate to change the smoothness of the replay
+
+===========================================================================================================================
+
+5/10/14 - Max:
+
+- Game Manager:
+	- Game Manager can now spawn players and AI
+	
+- CarController:
+	- This script has been split into a CarController script and a Car script. The Car script implements all non-human logic.
+	   The CarController script inherits from the Car script
+
+- AI:
+	- Created the AI_CarController class which inherits from Car. No implementation yet.
+
+===========================================================================================================================
+
+5/11/14 - Max:
+
+- AI:
+	- AI will now attempt to go from waypoint to waypoint. TO DO: Don't accelerate if we can't turn fast enough to the next checkpoint
