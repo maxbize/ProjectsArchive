@@ -37,11 +37,11 @@ public class LevelManager : MonoBehaviour {
 			if (checkpointID == checkpoints.Capacity) {
 				carsProgress[car].nextCheckPoint = 1;
 				carsProgress[car].lap++;
-                GhostCar.spawnGhost(car); // debugging
-				car.recordKeyFrame(); // debugging
                 foreach(ColoredCheckpoint cp in checkpoints) {
                     cp.resetLight(car.playerNb);
                 }
+				GhostCar.spawnGhost(car); // debugging
+				car.recordKeyFrame(); // debugging
 			}
 			else {
 				carsProgress[car].nextCheckPoint = checkpointID + 1;

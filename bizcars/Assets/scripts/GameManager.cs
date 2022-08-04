@@ -1,33 +1,31 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
-	public int nbPlayers = 1;
+	public int nbPlayers; // Set this in the scene
 	public Transform playerCar;
 
-	public int nbAI = 1;
+    public int nbAI; // Set this in the scene
 	public Transform AI_Car;
 
-	private double[][] startingPositions = new double[][]{
-		new double[]{0.05, 3.06, -0.1},
-		new double[]{-0.19, 2.56, -0.1},
-		new double[]{-0.68, 3.06, -0.1},
-		new double[]{-0.94, 2.56, -0.1}
-	};
+	private StartingPosition[] startingPositions = new StartingPosition[CONSTANTS.MAX_NUM_PLAYERS];
 
 	public static Color[] PLAYER_COLORS = new Color[]{
 		Color.blue, Color.red, Color.yellow, Color.green
 	};
 
+	public float startUpTime = 3.0f;
 
 	// Use this for initialization
 	void Start () {
+		// Get the starting positions and sort them
+		startingPositions = GameObject.Find ("StartingPositions").GetComponentsInChildren<StartingPosition>();
+		
 		int players = (int) Mathf.Clamp(nbPlayers, 0, startingPositions.Length);
 		int ai = (int) Mathf.Clamp(nbAI, 0, startingPositions.Length - players);
 
-		int i;
-		for (i = 0; i < players + ai; i++) {
+		for (int i = 0; i < players + ai; i++) {
 			if (i < players) {
 				spawnCar (playerCar, i, true);
 			}
@@ -38,25 +36,35 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	void spawnCar(Transform prefab, int playerIndex, bool isHuman) {
-			// position the players
-			Transform obj = (Transform) Instantiate(prefab, new Vector3((float)this.startingPositions[playerIndex][0], 
-		                                                            (float)this.startingPositions[playerIndex][1], 
-		                                                            (float)this.startingPositions[playerIndex][2]),
-			                                        						Quaternion.identity);
-			
-			// assign keys to the players
-			GameObject car = obj.gameObject;
-			if (isHuman) {
-				CarController controller = car.GetComponent<CarController> ();
-				controller.SetPlayerInputNb (playerIndex);
+		// position the players
+		Transform startPosTr;
+		for (int i = 0; i < startingPositions.Length; i++) {
+			if (startingPositions[i].carNum == playerIndex) {
+				startPosTr = startingPositions[i].transform;
+				break;
 			}
+		}
+		Transform obj = (Transform) Instantiate(prefab, startingPositions[playerIndex].transform.position, 
+		                                        Quaternion.Euler(startingPositions[playerIndex].transform.eulerAngles));
+		
+		// assign keys to the players
+		GameObject car = obj.gameObject;
+	    if (isHuman) {
+	        CarController controller = car.GetComponent<CarController>();
+	        controller.SetPlayerInputNb(playerIndex);
+			controller.disableControl(startUpTime);
+	    }
+	    else {
+			AI_CarController carController = car.GetComponent<AI_CarController>();
+	        carController.playerNb = playerIndex;
+			carController.disableControl(startUpTime);
+	    }
 
-			obj.Rotate(0, 0, -90f);
-			obj.name = "Car Player " + (playerIndex + 1).ToString();
-			
-			// render a different color for each player
-			SpriteRenderer renderer = car.GetComponent<SpriteRenderer>();
-			renderer.color = PLAYER_COLORS[playerIndex];
+		obj.name = "Car Player " + (playerIndex + 1).ToString();
+		
+		// render a different color for each player
+		SpriteRenderer renderer = car.GetComponent<SpriteRenderer>();
+		renderer.color = PLAYER_COLORS[playerIndex];
+
 	}
-	
 }

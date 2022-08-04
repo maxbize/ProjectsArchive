@@ -10,6 +10,9 @@ public class Car : MonoBehaviour {
 	public float fwdDragCoef = 0.4F;
 	public float frictionCoef = 0.2F;
 	public float brakePower = 0.5F;
+
+	protected bool controlEnabled = false;
+	float controlBlockTimer = 0;
 	
 	public float phase { get; protected set; }
 	public float skidPhaseThreshold = 35F;
@@ -27,9 +30,17 @@ public class Car : MonoBehaviour {
 	protected Vector2 fwd;
 	protected Vector2 right;
 
+    Queue inventory = new Queue();
+    int maxInventorySlots = 10;
+
+    public Transform missilePrefab;
+
+	AudioSource engineAudio;
+
 	// Use this for initialization
 	virtual protected void Start () {
 		myRecorder = gameObject.GetComponent<GhostRecorder>();
+		engineAudio = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -46,26 +57,26 @@ public class Car : MonoBehaviour {
 			recordKeyFrame();
 		}
 		
-		if (rigidbody2D.velocity.magnitude > 0) {
+		if (GetComponent<Rigidbody2D>().velocity.magnitude > 0) {
 			// Add a slip force depending on phase difference between velocity and orientation
-			phase = Vector2.Angle (rigidbody2D.velocity, fwd);
-			float slipForce = Mathf.Sin (Mathf.Deg2Rad * phase) * slipForceMult * rigidbody2D.velocity.magnitude * controlMod;
+			phase = Vector2.Angle (GetComponent<Rigidbody2D>().velocity, fwd);
+			float slipForce = Mathf.Sin (Mathf.Deg2Rad * phase) * slipForceMult * GetComponent<Rigidbody2D>().velocity.magnitude * controlMod;
 			float slipForceDir = 1F;
-			if (Vector3.Cross(fwd, rigidbody2D.velocity).z < 0) {
+			if (Vector3.Cross(fwd, GetComponent<Rigidbody2D>().velocity).z < 0) {
 				slipForceDir = -1F;
 			}
-			rigidbody2D.AddForce (right * slipForce * slipForceDir);
+			GetComponent<Rigidbody2D>().AddForce (right * slipForce * slipForceDir);
 			
 			// There should always be some friction (const) + drag (v^2) opposing motion
-			rigidbody2D.AddForce (-rigidbody2D.velocity * rigidbody2D.velocity.magnitude * fwdDragCoef);
-			rigidbody2D.AddForce (-rigidbody2D.velocity.normalized * frictionCoef * controlMod);
+			GetComponent<Rigidbody2D>().AddForce (-GetComponent<Rigidbody2D>().velocity * GetComponent<Rigidbody2D>().velocity.magnitude * fwdDragCoef);
+			GetComponent<Rigidbody2D>().AddForce (-GetComponent<Rigidbody2D>().velocity.normalized * frictionCoef * controlMod);
 		}
 		
 		// Add a special effect =)
 		if (phase > skidPhaseThreshold 
 		    && phase < 90
 		    && !markedSkid 
-		    && rigidbody2D.velocity.magnitude > skidVelocityThreshold) {
+		    && GetComponent<Rigidbody2D>().velocity.magnitude > skidVelocityThreshold) {
 			markedSkid = true;
 			MakeSkid(SkidMark.side.left);
 			MakeSkid(SkidMark.side.right);
@@ -75,9 +86,15 @@ public class Car : MonoBehaviour {
 		}
 		
 		// Make some noise!
-		float speed = Mathf.Min (rigidbody2D.velocity.magnitude, 4f);
-		AudioSource audio = GetComponent<AudioSource> ();;
-		audio.pitch = speed / 3f;
+		float speed = Mathf.Min (GetComponent<Rigidbody2D>().velocity.magnitude, 4f);
+		engineAudio.pitch = speed / 3f;
+
+		if (!controlEnabled) {
+			controlBlockTimer -= Time.fixedDeltaTime;
+			if (controlBlockTimer < 0) {
+				controlEnabled = true;
+			}
+		}
 	}
 	
 	void MakeSkid(SkidMark.side side) {
@@ -92,9 +109,40 @@ public class Car : MonoBehaviour {
 		controlMod = newControl;
 	}
 	
-	public void recordKeyFrame() {
-		FrameState state = new FrameState (transform.position.x, transform.position.y, transform.eulerAngles.z);
-		myRecorder.addFrame (state);
+	public virtual void recordKeyFrame() {
+		if (myRecorder.enabled) {
+			FrameState state = new FrameState (transform.position.x, transform.position.y, transform.eulerAngles.z);
+			myRecorder.addFrame (state);
+		}
 		framesSinceKey = 0;
+	}
+
+    public void addItem(Item.type itemType) {
+        if (inventory.Count < maxInventorySlots) {
+            inventory.Enqueue(itemType);
+        }
+    }
+
+    protected void useNextItem() {
+        if (inventory.Count > 0) {
+            Item.type item = (Item.type)inventory.Dequeue();
+            switch (item) {
+                case Item.type.missile:
+                    fireMissile();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    protected void fireMissile() {
+        Transform missile = (Transform)Instantiate(missilePrefab, transform.position, transform.rotation);
+        missile.GetComponent<Missile>().carNbToIgnore = playerNb;
+    }
+
+	public void disableControl(float time) {
+		controlEnabled = false;
+		controlBlockTimer = time;
 	}
 }

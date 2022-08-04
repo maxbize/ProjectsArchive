@@ -6,6 +6,9 @@ TagManager:
   - Road
   - Grass
   - Checkpoint
+  - Waypoint
+  - Ignore
+  - Map Edge
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

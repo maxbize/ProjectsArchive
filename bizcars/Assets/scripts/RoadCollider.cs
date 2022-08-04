@@ -14,17 +14,25 @@ public class RoadCollider : MonoBehaviour {
 		parentCar.UpdateRoadControl (controlMod_road);
 	}
 
-	void OnTriggerEnter2D (Collider2D other) {
-		switch (other.tag) {
-		case "Road":
-			parentCar.UpdateRoadControl(controlMod_road);
-			break;
-		case "Grass":
-			parentCar.UpdateRoadControl(controlMod_grass);
-			break;
-		/*default:
-			Debug.LogError("Error: Unrecognized collider tag in RoadCollider::OnTriggerEnter: " + other.tag);
-			break;*/
+	void OnTriggerEnter2D(Collider2D other) {
+		OnTrigger(other.tag);
+	}
+
+	private void OnTriggerStay2D(Collider2D collision) {
+		OnTrigger(collision.tag);
+	}
+
+	private void OnTrigger(string type) {
+		switch (type) {
+			case "Road":
+				parentCar.UpdateRoadControl(controlMod_road);
+				break;
+			case "Grass":
+				parentCar.UpdateRoadControl(controlMod_grass);
+				break;
+				/*default:
+					Debug.LogError("Error: Unrecognized collider tag in RoadCollider::OnTriggerEnter: " + other.tag);
+					break;*/
 		}
 	}
 }

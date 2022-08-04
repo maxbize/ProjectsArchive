@@ -62,12 +62,14 @@ public class GhostCar : MonoBehaviour {
 	}
 
 	public static void spawnGhost(Car car) {
-		GameObject ghost = (GameObject)GameObject.Instantiate(GameObject.Find("Cloneable_GhostCar"));
-		GhostCar ghostScript = ghost.AddComponent<GhostCar>();
-		ghostScript.carToGhost = car;
-		Color carColor = car.GetComponent<SpriteRenderer>().color;
-		ghost.GetComponent<SpriteRenderer>().color = new Color(carColor.r, carColor.g, carColor.b, 0.5F);
-		ghostScript.Init();
-		car.GetComponent<GhostRecorder>().restartRecording();
+		if (car.GetComponent<GhostRecorder> ().enabled) {
+			GameObject ghost = (GameObject)GameObject.Instantiate (GameObject.Find ("Cloneable_GhostCar"));
+			GhostCar ghostScript = ghost.AddComponent<GhostCar> ();
+			ghostScript.carToGhost = car;
+			Color carColor = car.GetComponent<SpriteRenderer> ().color;
+			ghost.GetComponent<SpriteRenderer> ().color = new Color (carColor.r, carColor.g, carColor.b, 0.5F);
+			ghostScript.Init ();
+			car.GetComponent<GhostRecorder> ().restartRecording ();
+		}
 	}
 }

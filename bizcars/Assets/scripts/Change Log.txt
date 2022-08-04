@@ -56,4 +56,94 @@
 5/11/14 - Max:
 
 - AI:
-	- AI will now attempt to go from waypoint to waypoint. TO DO: Don't accelerate if we can't turn fast enough to the next checkpoint
+	- AI will now attempt to go from waypoint to waypoint.
+	- AI is semi-competent. Won't accelerate unless it thinks it can turn fast enough to make the next waypoint
+
+- Checkpoints:
+	- Fixed a bug where checkpoint colors for AI were not being set
+
+
+===========================================================================================================================
+
+5/12/14 - Max:
+
+- Ghosts:
+	- Fixed some bugs that occured when the Ghost was deactivated
+	
+- Other Bugs:
+	- Fixed the exception coming from roadColliders on startup
+
+===========================================================================================================================
+
+5/14/14 - Max:
+
+- Maps:
+	- Started importing Map2
+
+- Game Manager:
+	- Added a new SpawnPoint prefab that Game Manager now scans for
+
+- Constants:
+	- Added a new static class "CONSTANTS" which will store various constants (e.g. max number of players)
+
+
+===========================================================================================================================
+
+5/26/14 - Max:
+
+- Maps:
+	- Continued fixing up Map2
+	- Changed the collision on the stands prefab
+	- Added edge collideres on Map2 to force players to stay in the map
+
+- Items (Weapons/Powerups):
+	- Added new classes:
+		- Item: an item to be picked up off the ground
+		- ItemsManager: Periodically places items on the map
+		- Explosion: Adds a force to nearby objects then destroys itself
+		- Missile: Fires forward until it hits an object, then explodes
+	- Made various additions to Car to allow for using items (inventory, fire key)
+
+===========================================================================================================================
+
+6/1/14 - Max:
+
+- Items (Weapons/Powerups):
+	- Items now spawn on a random part of the AI_Waypoints line
+	- There is now Only a limited number of items can spawn at once
+	- Item spawns will no longer overlap
+
+----------
+
+6/1/14 - Scott:
+
+- Items (Weapons/Powerups):
+	- Created a new graphic for items
+
+===========================================================================================================================
+
+7/18/14 - Max:
+
+- Skids:
+	- SkidMarks now have smoke trails
+		- Note: It would be nice if the smoke trails would render on top of the cars after a second
+		  so that you could literally leave your opponents in the dust :)
+	- SkidMarks now play a screaching sound
+
+- Game Manager / Car:
+	- Added a countdown at the start of the race
+
+===========================================================================================================================
+
+7/19/14 - Max:
+
+- Skids:
+	- Skids now start a little faded	
+	
+- Start:
+	- Added a start light sprite
+	- Added a "delayedDestroy" class that calls destroy at start with a delay
+	
+- Items:
+	- Corrected render depth - now renders above skids
+

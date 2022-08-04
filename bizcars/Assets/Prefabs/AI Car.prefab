@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: RoadCollider
-  m_TagString: Untagged
+  m_TagString: Ignore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,11 +26,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 212: {fileID: 21200000}
+  - 114: {fileID: 11400004}
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
   - 114: {fileID: 11400002}
   - 82: {fileID: 8200000}
-  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: AI Car
   m_TagString: Player
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a817d96a1a1b6764e88260dcebf7b1a2, type: 3}
   m_Name: 
@@ -198,10 +198,11 @@ MonoBehaviour:
   fwdDragCoef: .400000006
   frictionCoef: .200000003
   brakePower: .5
-  skidPhaseThreshold: 35
+  skidPhaseThreshold: 40
   skidVelocityThreshold: .200000003
   trailClone: {fileID: 100000, guid: 104967687f4c7ca44b95c2855b154ab2, type: 2}
   playerNb: 0
+  missilePrefab: {fileID: 400000, guid: 916c65941ff0def4abdd402f24626d21, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

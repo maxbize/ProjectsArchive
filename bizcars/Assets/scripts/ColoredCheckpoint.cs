@@ -13,7 +13,7 @@ public class ColoredCheckpoint : MonoBehaviour {
             Debug.LogError("ERROR: Checkpoint created without an ID!");
         }
         levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
-        defaultColor = gameObject.transform.FindChild("check-1").GetComponent<SpriteRenderer>().color;
+        defaultColor = gameObject.transform.Find("check-1").GetComponent<SpriteRenderer>().color;
 	}
 
 	void OnTriggerEnter2D (Collider2D other) {
@@ -21,7 +21,7 @@ public class ColoredCheckpoint : MonoBehaviour {
             Car car = other.transform.gameObject.GetComponent<Car>();
             if (levelManager.recordCheckpoint(order, car)) {
 			    string lightName = "check-" + (car.playerNb + 1).ToString();
-			    Transform light = gameObject.transform.FindChild(lightName);
+			    Transform light = gameObject.transform.Find(lightName);
                 if (light) {
                     SpriteRenderer renderer = light.gameObject.GetComponent<SpriteRenderer>();
                     renderer.color = GameManager.PLAYER_COLORS[car.playerNb];
@@ -32,7 +32,7 @@ public class ColoredCheckpoint : MonoBehaviour {
 
     public void resetLight(int player) {
         string lightName = "check-" + (player + 1).ToString();
-        Transform light = gameObject.transform.FindChild(lightName);
+        Transform light = gameObject.transform.Find(lightName);
         if (light)
         {
             SpriteRenderer renderer = light.gameObject.GetComponent<SpriteRenderer>();
