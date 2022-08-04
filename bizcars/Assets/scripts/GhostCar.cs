@@ -23,11 +23,12 @@ public class GhostCar : MonoBehaviour {
     FrameState lastFs;
     FrameState nextFs;
 
-	float keyFrame_dt = GhostRecorder.keyFrameRate * Time.fixedDeltaTime;
+	float keyFrame_dt;
 
 	// Use this for initialization
     // Can't use start because the recording could get restarted before Start() gets called
 	public void Init () {
+		keyFrame_dt = GhostRecorder.keyFrameRate * Time.fixedDeltaTime;
 		recording = carToGhost.GetComponent<GhostRecorder>().getRecordingCopy();
 
         lastFs = FrameState.fromBuffer(recording, FrameState.size * frameIndex);

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
@@ -22,6 +23,11 @@ public class GameManager : MonoBehaviour {
 		// Get the starting positions and sort them
 		startingPositions = GameObject.Find ("StartingPositions").GetComponentsInChildren<StartingPosition>();
 		
+		if (!MainMenu.vsAi) {
+			nbAI = 0;
+			Destroy(FindObjectOfType<ItemsManager>());
+        }
+
 		int players = (int) Mathf.Clamp(nbPlayers, 0, startingPositions.Length);
 		int ai = (int) Mathf.Clamp(nbAI, 0, startingPositions.Length - players);
 
@@ -34,8 +40,14 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 	}
-	
-	void spawnCar(Transform prefab, int playerIndex, bool isHuman) {
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+			SceneManager.LoadScene("Menu");
+        }
+    }
+
+    void spawnCar(Transform prefab, int playerIndex, bool isHuman) {
 		// position the players
 		Transform startPosTr;
 		for (int i = 0; i < startingPositions.Length; i++) {
@@ -65,6 +77,7 @@ public class GameManager : MonoBehaviour {
 		// render a different color for each player
 		SpriteRenderer renderer = car.GetComponent<SpriteRenderer>();
 		renderer.color = PLAYER_COLORS[playerIndex];
+		car.GetComponent<GhostRecorder>().enabled = isHuman && !MainMenu.vsAi;
 
 	}
 }

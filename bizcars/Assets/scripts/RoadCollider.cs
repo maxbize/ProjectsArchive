@@ -23,6 +23,10 @@ public class RoadCollider : MonoBehaviour {
 	}
 
 	private void OnTrigger(string type) {
+		if (parentCar == null) {
+			return;
+        }
+
 		switch (type) {
 			case "Road":
 				parentCar.UpdateRoadControl(controlMod_road);
