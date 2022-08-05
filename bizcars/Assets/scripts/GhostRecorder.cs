@@ -26,7 +26,9 @@ public class GhostRecorder : MonoBehaviour {
 	}
 
 	public void addFrame(FrameState frameState) {
-		recording.Write(frameState.toBuffer(), 0, FrameState.size);
+		if (recording != null) {
+			recording.Write(frameState.toBuffer(), 0, FrameState.size);
+		}
 	}
 
 	// We don't want to give someone direct access to the recording stream. Otherwise we might 
