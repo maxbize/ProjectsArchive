@@ -63,12 +63,14 @@ public class TeamManager : MonoBehaviour
         if (team == Team.one) {
             Debug.Log("Spawned Player on team one");
             Quaternion look = Quaternion.identity;
-            Network.Instantiate(playerPrefab, newSpawnPoint(team), look, 0);
+            //Network.Instantiate(playerPrefab, newSpawnPoint(team), look, 0);
+            Instantiate(playerPrefab, newSpawnPoint(team), look);
         }
         else if (team == Team.two) {
             Debug.Log("Spawned Player on team two");
             Quaternion look = Quaternion.Euler(0, 180, 0);
-            Network.Instantiate(playerPrefab, newSpawnPoint(team), look, 0);
+            //Network.Instantiate(playerPrefab, newSpawnPoint(team), look, 0);
+            Instantiate(playerPrefab, newSpawnPoint(team), look);
         }
     }
 }

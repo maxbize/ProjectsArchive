@@ -18,7 +18,7 @@ public class RadarSpriteFactory : MonoBehaviour {
     }
 
     public GameObject makeNewSpriteObj(blipType type) {
-        GameObject blipObj = (GameObject)GameObject.Instantiate(blipPrefab);
+        GameObject blipObj = Instantiate(blipPrefab).gameObject;
         blipObj.GetComponent<Image>().sprite = spriteMap[type];
         return blipObj;
     }

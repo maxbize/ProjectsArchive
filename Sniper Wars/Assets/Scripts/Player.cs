@@ -15,20 +15,22 @@ public class Player : MonoBehaviour {
 	    // We can figure out our team from our spawn location. Kinda hacky...
         if (transform.position.z < 0) {
             team = TeamManager.Team.one;
-            myGraphics.renderer.material.color = Color.green;
+            myGraphics.GetComponent<Renderer>().material.color = Color.green;
         }
         else {
             team = TeamManager.Team.two;
-            myGraphics.renderer.material.color = Color.blue;
+            myGraphics.GetComponent<Renderer>().material.color = Color.blue;
         }
         FindObjectOfType<GameManager>().registerNewPlayer(this);
-        if (networkView.isMine) {
-            networkView.RPC("registerDisplayName", RPCMode.AllBuffered, PlayerPrefs.GetString(PlayerPrefsKeys.displayName));
+        /*
+        if (GetComponent<NetworkView>().isMine) {
+            GetComponent<NetworkView>().RPC("registerDisplayName", RPCMode.AllBuffered, PlayerPrefs.GetString(PlayerPrefsKeys.displayName));
         }
+        */
 	}
 	
 
-    [RPC]
+    //[RPC]
     public void registerDamage(int damage, int shooterId) {
         health -= damage;
         Debug.Log("Got hit for: " + damage);
@@ -37,18 +39,20 @@ public class Player : MonoBehaviour {
             FindObjectOfType<GameManager>().registerKill(shooterId, id);
         }
 
+        /*
         if (health < 0 && Network.isServer) {
             networkView.RPC("respawn", RPCMode.All, GameObject.FindObjectOfType<TeamManager>().newSpawnPoint(team));
         }
+        */
     }
 
-    [RPC]
+    //[RPC]
     public void respawn(Vector3 pos) {
         transform.position = pos;
         health = 100;
     }
 
-    [RPC]
+    //[RPC]
     public void registerDisplayName(string displayName) {
         this.displayName = displayName;
     }

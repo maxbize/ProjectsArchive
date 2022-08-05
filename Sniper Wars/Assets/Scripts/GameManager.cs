@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour {
         currentId++;
         Vector3 dist = new Vector3(1, 2, 3);
         Vector3 a = Quaternion.identity * dist;
-        Quaternion.a
+        //Quaternion.a
     }
 
     public Player getPlayerFromId(int id) {

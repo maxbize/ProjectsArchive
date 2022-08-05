@@ -10,14 +10,17 @@ public class NetworkManagerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        MasterServer.RequestHostList(gameTypeName);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        //MasterServer.RequestHostList(gameTypeName);
+
+        FindObjectOfType<TeamManager>().spawnPlayer(); // Bypassing all network logic and jumping straight to spawn
+    }
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 
+    /*
     void startServer() {
         Network.InitializeServer(4, 25000, !Network.HavePublicAddress());
         MasterServer.RegisterHost(gameTypeName, gameName);
@@ -48,6 +51,7 @@ public class NetworkManagerScript : MonoBehaviour {
             Debug.Log("Unable to connect to server! Event: " + mse);
         }
     }
+    */
 
     public IEnumerator OnConnectedToServer() {
         Debug.Log("Connected to server!!");
@@ -60,6 +64,7 @@ public class NetworkManagerScript : MonoBehaviour {
         FindObjectOfType<TeamManager>().spawnPlayer();
     }
 
+    /*
     void OnDisconnectedFromServer(NetworkDisconnection info) {
         Debug.Log("Disconnected from server: " + info);
     }
@@ -69,4 +74,5 @@ public class NetworkManagerScript : MonoBehaviour {
         Network.RemoveRPCs(player);
         Network.DestroyPlayerObjects(player);
     }
+    */
 }

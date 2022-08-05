@@ -23,13 +23,13 @@ public class BulletManager : MonoBehaviour {
 	
 	}
 
-    [RPC]
+    //[RPC]
     public void shoot(Vector3 origin, Vector3 dir, int playerId) {
         Transform bulletObj = (Transform)Instantiate(bulletPrefab, origin, Quaternion.FromToRotation(origin, origin + dir));
         bulletObj.GetComponent<Rigidbody>().velocity = dir * 3000;
 
         // Only the server will actually handle bullet damage
-        if (Network.isServer) {
+        if (true) {//Network.isServer) {
             int damage = baseDamage;
             List<RaycastHit> hits = Physics.RaycastAll(origin, dir, shotDistance).OrderBy(h => h.distance).ToList();
             foreach (RaycastHit hit in hits) {
@@ -37,7 +37,7 @@ public class BulletManager : MonoBehaviour {
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Players")) {
                     Player hitPlayer = hit.transform.GetComponent<Player>();
                     if (gameManager.getPlayerFromId(playerId).team != hitPlayer.team) {
-                        hitPlayer.networkView.RPC("registerDamage", RPCMode.All, damage, playerId);
+                        //hitPlayer.networkView.RPC("registerDamage", RPCMode.All, damage, playerId);
                     }
                     damage -= (int)(baseDamage * (1 - hit.transform.GetComponent<StoppingPower>().damageThroughMultiplier));
                 }

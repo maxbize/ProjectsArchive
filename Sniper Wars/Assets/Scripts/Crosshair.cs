@@ -46,9 +46,11 @@ public class Crosshair : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (!networkView.isMine) {
+        /*
+        if (!GetComponent<NetworkView>().isMine) {
             return;
         }
+        */
 
         float playerSpeed = playerController.velocity.magnitude;
 
@@ -77,10 +79,10 @@ public class Crosshair : MonoBehaviour
 
         if (Input.GetMouseButtonDown((int)mouseButtons.right)) {
             if (isZoomed) {
-                transform.parent.camera.fieldOfView = zoomOutFOV;
+                transform.parent.GetComponent<Camera>().fieldOfView = zoomOutFOV;
             }
             else {
-                transform.parent.camera.fieldOfView = zoomInFOV;
+                transform.parent.GetComponent<Camera>().fieldOfView = zoomInFOV;
             }
             isZoomed = !isZoomed;
         }
@@ -106,7 +108,7 @@ public class Crosshair : MonoBehaviour
         offset = transform.TransformDirection(offset);
         Vector3 dir = transform.position - cam.position + offset;
         rotateScale = 1.5f;
-        bulletManager.networkView.RPC("shoot", RPCMode.All, cam.position, dir, player.GetComponent<Player>().id);
+        //bulletManager.GetComponent<NetworkView>().RPC("shoot", RPCMode.All, cam.position, dir, player.GetComponent<Player>().id);
     }
 
 }
