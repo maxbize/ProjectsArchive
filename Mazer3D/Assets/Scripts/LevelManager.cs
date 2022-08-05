@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour {
 
     private bool markTrail = true;
 
-    private float lengthOfSong = 322.5F;
+    private float lengthOfSong = 3.5F;
     public Transform finalMenu;
     private bool gameEnded = false;
 
@@ -45,6 +45,7 @@ public class LevelManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        /*
         if (Time.timeSinceLevelLoad > lengthOfSong) {
             // End of the game!
             if (!gameEnded) {
@@ -57,6 +58,7 @@ public class LevelManager : MonoBehaviour {
                 Application.LoadLevel("game");
             }
         }
+        */
 	}
 
     public void BuildLevel(Int3 dimensions) {
