@@ -1,0 +1,30 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"name": "FlixelTut",
+			"path": "D:\\Dropbox\\Programming\\HaxeFlixel/FlixelTut"
+		},
+		{
+			"follow_symlinks": true,
+			"name": "Flixel",
+			"path": "C:\\HaxeToolkit\\haxe\\lib\\flixel/3,3,11/"
+		},
+		{
+			"follow_symlinks": true,
+			"name": "Box2D",
+			"path": "C:\\HaxeToolkit\\haxe\\lib\\box2d/1,2,3/"
+		},
+		{
+			"follow_symlinks": true,
+			"name": "Flixel Addons",
+			"path": "C:\\HaxeToolkit\\haxe\\lib\\flixel-addons/1,1,0/"
+		},
+		{
+			"follow_symlinks": true,
+			"name": "Haxe",
+			"path": "C:\\HaxeToolkit\\haxe\\std"
+		}
+	]
+}
